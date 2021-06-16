@@ -5,9 +5,10 @@ import { AiOutlineStock } from "react-icons/ai";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoMdHeart } from "react-icons/io";
 let currency;
+let str = "";
 
 
-const Coin = ({ icon, coinName, symbol, price, volume, priceChange24, marketcap, cur, id }) => {
+const Coin = ({ icon, coinName, symbol, price, volume, priceChange24, marketcap, cur, id}) => {
 
     for (let i = 0; i < curmap.length; i++) {
         if (curmap[i].id === cur) {
@@ -17,11 +18,11 @@ const Coin = ({ icon, coinName, symbol, price, volume, priceChange24, marketcap,
 
 
     const [bookmark, setbookmark] = useState(() => {
-        if (localStorage.getItem(id) == null) {
-            return false;
+        if (localStorage.getItem("book") != null && localStorage.getItem("book").includes(id)) {
+            return true;
         }
         else {
-            return true;
+            return false;
         }
     });
 
@@ -29,11 +30,20 @@ const Coin = ({ icon, coinName, symbol, price, volume, priceChange24, marketcap,
     function addBookmark() {
         if (bookmark) {
             setbookmark(false)
-            localStorage.removeItem(id);
+            str = localStorage.getItem("book");
+            str = str.replace(`"${id}" `, "");
+            if(str.length <= 0){
+                localStorage.removeItem("book");
+            }
+            else{
+                 localStorage.setItem("book", str);
+            }
+           
         }
         else {
             setbookmark(true);
-            localStorage.setItem(id, true);
+            str = str + `"${id}" `
+            localStorage.setItem("book", str);
         }
     }
 

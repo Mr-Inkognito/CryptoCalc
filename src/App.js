@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Coin from './components/Coin';
 import NavBar from './components/NavBar';
 import './App.css';
-import Placeholder from './components/Placeholder';
+import { AiOutlineStock } from "react-icons/ai";
 import { IoMdHeart } from "react-icons/io";
 import { IoMdHeartEmpty } from "react-icons/io";
+import CoinListAll from './components/CoinListAll';
+import CoinListBook from './components/CoinListBook';
 
 
 function App() {
@@ -15,14 +16,12 @@ function App() {
   const [search, setSearch] = useState('')
   const [cur, setcur] = useState("usd")
   const [book, setbook] = useState(false)
+  const [invested, setinvested] = useState(false)
 
   const changeHandler = e => {
     setSearch(e.target.value)
   }
 
-  const coinFilter = coins.filter(coin =>
-    coin.name.toLowerCase().includes(search.toLowerCase())
-  )
 
 
   function bookmode() {
@@ -31,6 +30,15 @@ function App() {
     }
     else {
       setbook(true);
+    }
+  }
+
+  function investmode() {
+    if (invested) {
+      setinvested(false);
+    }
+    else {
+      setinvested(true);
     }
   }
 
@@ -83,6 +91,20 @@ function App() {
               }
             })()}
           </div>
+          <div className="investMark" onClick={investmode}>
+
+            {(() => {
+              if (invested === true) {
+                return (
+                  <AiOutlineStock size={50} color={"green"}/>
+                )
+              } else {
+                return (
+                  <AiOutlineStock size={50} color={"white"}/>
+                )
+              }
+            })()}
+          </div>
           <form>
             <input type="text" placeholder="Search" className="search-input" onChange={changeHandler} />
           </form>
@@ -96,26 +118,17 @@ function App() {
         </div>
       </div>
 
-      <Placeholder />
-      {
-        coinFilter.map(coin => {
+      {(() => {
+        if (book === true) {
           return (
-            <div>
-              <Coin
-                key={coin.id}
-                coinName={coin.name}
-                icon={coin.image}
-                symbol={coin.symbol}
-                volume={coin.total_volume}
-                price={coin.current_price}
-                priceChange24={coin.price_change_percentage_24h}
-                marketcap={coin.market_cap}
-                cur={cur}
-                id={coin.id}
-              />
-            </div>
-          );
-        })}
+            <CoinListBook search={search} coins={coins} cur={cur} />
+          )
+        } else {
+          return (
+            <CoinListAll search={search} coins={coins} cur={cur} />
+          )
+        }
+      })()}
 
     </div>
   );

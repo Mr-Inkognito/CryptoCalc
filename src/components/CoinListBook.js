@@ -2,12 +2,12 @@ import React from 'react'
 import Placeholder from './Placeholder';
 import Coin from './Coin';
 
-const CoinListAll = ({ search, coins, cur }) => {
+
+const CoinListBook = ({ search, coins, cur, book }) => {
 
     const coinFilter = coins.filter(coin =>
         coin.name.toLowerCase().includes(search.toLowerCase())
     )
-
 
 
     return (
@@ -15,7 +15,7 @@ const CoinListAll = ({ search, coins, cur }) => {
             <Placeholder />
             {
                 coinFilter.map(coin => {
-                    return (
+                    return (localStorage.getItem("book")!=null && localStorage.getItem("book").includes(coin.id) ) ? (
                         <div>
                             <Coin
                                 key={coin.id}
@@ -30,10 +30,10 @@ const CoinListAll = ({ search, coins, cur }) => {
                                 id={coin.id}
                             />
                         </div>
-                    );
+                    ) : ("");
                 })}
         </div>
     )
 }
 
-export default CoinListAll
+export default CoinListBook
