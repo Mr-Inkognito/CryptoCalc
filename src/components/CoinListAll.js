@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Placeholder from './Placeholder';
 import Coin from './Coin';
 
 const CoinListAll = ({ search, coins, cur }) => {
+
+
 
     const coinFilter = coins.filter(coin =>
         coin.name.toLowerCase().includes(search.toLowerCase())

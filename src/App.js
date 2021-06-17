@@ -7,6 +7,8 @@ import { IoMdHeart } from "react-icons/io";
 import { IoMdHeartEmpty } from "react-icons/io";
 import CoinListAll from './components/CoinListAll';
 import CoinListBook from './components/CoinListBook';
+import CoinListInvested from './components/CoinListInvested';
+import Notice from './components/Notice';
 
 
 function App() {
@@ -17,6 +19,7 @@ function App() {
   const [cur, setcur] = useState("usd")
   const [book, setbook] = useState(false)
   const [invested, setinvested] = useState(false)
+
 
   const changeHandler = e => {
     setSearch(e.target.value)
@@ -96,11 +99,11 @@ function App() {
             {(() => {
               if (invested === true) {
                 return (
-                  <AiOutlineStock size={50} color={"green"}/>
+                  <AiOutlineStock size={50} color={"green"} />
                 )
               } else {
                 return (
-                  <AiOutlineStock size={50} color={"white"}/>
+                  <AiOutlineStock size={50} color={"white"} />
                 )
               }
             })()}
@@ -112,20 +115,28 @@ function App() {
       </div>
 
 
-      <div className="invest">
-        <div className="invData">
-
-        </div>
-      </div>
-
       {(() => {
-        if (book === true) {
+        if (invested === true) {
           return (
-            <CoinListBook search={search} coins={coins} cur={cur} />
+            <CoinListInvested search={search} coins={coins} cur={cur} />
           )
-        } else {
+        }
+        else if (book === true) {
+            if(localStorage.getItem("book")=== null){
+              return(
+                <Notice text={"There are no favourites chosen"}/>
+              )
+            }
+            else{
+              return(
+                <CoinListBook search={search} coins={coins} cur={cur} />
+              )
+            }
+        }
+        else {
           return (
             <CoinListAll search={search} coins={coins} cur={cur} />
+            
           )
         }
       })()}

@@ -1,13 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Placeholder from './Placeholder';
 import Coin from './Coin';
 
 
-const CoinListBook = ({ search, coins, cur, book }) => {
+const CoinListBook = ({ search, coins, cur }) => {
 
-    const coinFilter = coins.filter(coin =>
+    const [filter, setfilter] = useState(coins)
+
+    const del = (id) => {
+        setfilter(coins.filter((coin)=> coin.id != id))
+    }
+
+    const coinFilter = filter.filter(coin =>
         coin.name.toLowerCase().includes(search.toLowerCase())
     )
+
 
 
     return (
@@ -28,6 +35,7 @@ const CoinListBook = ({ search, coins, cur, book }) => {
                                 marketcap={coin.market_cap}
                                 cur={cur}
                                 id={coin.id}
+                                del={del}
                             />
                         </div>
                     ) : ("");

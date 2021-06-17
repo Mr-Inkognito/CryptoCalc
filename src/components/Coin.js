@@ -4,11 +4,12 @@ import curmap from '../JSON/cur.json'
 import { AiOutlineStock } from "react-icons/ai";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoMdHeart } from "react-icons/io";
+import Popup from './Popup';
 let currency;
 let str = "";
 
 
-const Coin = ({ icon, coinName, symbol, price, volume, priceChange24, marketcap, cur, id}) => {
+const Coin = ({ icon, coinName, symbol, price, volume, priceChange24, marketcap, cur, id, del }) => {
 
     for (let i = 0; i < curmap.length; i++) {
         if (curmap[i].id === cur) {
@@ -26,25 +27,44 @@ const Coin = ({ icon, coinName, symbol, price, volume, priceChange24, marketcap,
         }
     });
 
+    const [closePopup, setclosePopup] = useState(false)
+    const [iconColor, seticonColor] = useState(() => {
+        if (localStorage.getItem(id) !== null) {
+            return "green";
+        }
+        else {
+            return "white";
+        }
+    })
+    const [investedValue, setinvestedValue] = useState(null)
+
 
     function addBookmark() {
         if (bookmark) {
             setbookmark(false)
+            if (del != null) {
+                del(id);
+            }
             str = localStorage.getItem("book");
             str = str.replace(`"${id}" `, "");
-            if(str.length <= 0){
+            if (str.length <= 0) {
                 localStorage.removeItem("book");
             }
-            else{
-                 localStorage.setItem("book", str);
+            else {
+                localStorage.setItem("book", str);
             }
-           
+
         }
         else {
             setbookmark(true);
             str = str + `"${id}" `
             localStorage.setItem("book", str);
         }
+    }
+
+
+    function setInvest(value) {
+        setinvestedValue(value.target.value);
     }
 
     return (
@@ -80,11 +100,18 @@ const Coin = ({ icon, coinName, symbol, price, volume, priceChange24, marketcap,
                     <p className="coin-marketcap">
                         {currency}{marketcap.toLocaleString()}
                     </p>
+                    <span className="calc" onClick={() => setclosePopup(true)}>
+                        <AiOutlineStock size={50} color={iconColor} />
+                    </span>
                 </div>
-                <span className="calc" >
-                    <AiOutlineStock size={50} />
-                    <p>Calculate</p>
-                </span>
+
+                <Popup open={closePopup} setOpen={setclosePopup} setInvest={setInvest} setCloseColor={seticonColor}>
+                    <span className="okbtn" onClick={() => {
+                        localStorage.setItem(id, `${investedValue}|${cur}`);
+                        seticonColor("green");
+                        setclosePopup(false)
+                    }}>OK</span>
+                </Popup>
 
             </div>
         </div>

@@ -14,13 +14,16 @@
     align-items: center;
     height: 80px;
     border-bottom: cornsilk solid;
+    background-color: cadetblue;
 }
 
 .coin{
     display: flex;
     align-items: center;
-    padding-right: 20px;
-    min-width: 300px;
+    justify-content: center;
+    width: 20%;
+    background-color: blue;
+    margin-left: 1%;
 }
 .coin h1{
     font-size: 16px;
@@ -38,32 +41,46 @@
     text-align: center;
     justify-content: space-between;
     width: 100%;
+    align-items: center;
+    background-color: blueviolet;
 }
 .coin-price{
-    width: 110px;
+    width: 15%;
 }
 
 .coin-volume{
-    width: 230px;
+    width: 15%;
 }
 
 .coin-perc-red{
     color:red;
+    width: 15%;
 }
 .coin-perc-green{
     color:green;
+    width: 15%;
 }
 
 .coin-marketcap {
-    width: 230px;
+    width: 15%;
 }
   
 .calc{
     cursor: pointer;
+    width: 15%;
 }
 .bookmark{
-    margin-right: 10px;
+    padding-right: 1%;
+    padding-top: 5px;
+    padding-bottom: 5px;
     cursor: pointer;
+    background-color: chartreuse;
+}
+
+.okbtn{
+    color: #fff;
+    cursor: pointer;
+    width: 15%;
 }
 
 
