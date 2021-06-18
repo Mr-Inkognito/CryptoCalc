@@ -3,11 +3,15 @@ import '../styles/coin.css'
 import curmap from '../JSON/cur.json'
 import { AiOutlineStock } from "react-icons/ai";
 import { IoMdHeartEmpty } from "react-icons/io";
+import { BsCheck } from "react-icons/bs";
 import { IoMdHeart } from "react-icons/io";
 import Popup from './Popup';
+import '../styles/popup.css'
+import { isCompositeComponentWithType } from 'react-dom/test-utils';
 let currency;
 let str = "";
-
+let obj = {};
+let array = [];
 
 const Coin = ({ icon, coinName, symbol, price, volume, priceChange24, marketcap, cur, id, del }) => {
 
@@ -19,7 +23,7 @@ const Coin = ({ icon, coinName, symbol, price, volume, priceChange24, marketcap,
 
 
     const [bookmark, setbookmark] = useState(() => {
-        if (localStorage.getItem("book") != null && localStorage.getItem("book").includes(id)) {
+        if (localStorage.getItem("book") !== null && localStorage.getItem("book").includes(id)) {
             return true;
         }
         else {
@@ -29,14 +33,17 @@ const Coin = ({ icon, coinName, symbol, price, volume, priceChange24, marketcap,
 
     const [closePopup, setclosePopup] = useState(false)
     const [iconColor, seticonColor] = useState(() => {
-        if (localStorage.getItem(id) !== null) {
+        if (localStorage.getItem("curCalc") !== null && localStorage.getItem("curCalc").includes(id)) {
             return "green";
         }
         else {
-            return "white";
+           return "white"; 
         }
     })
     const [investedValue, setinvestedValue] = useState(null)
+    const [inputColor, setInputColor] = useState({borderColor: "white"})
+        
+    
 
 
     function addBookmark() {
@@ -64,7 +71,9 @@ const Coin = ({ icon, coinName, symbol, price, volume, priceChange24, marketcap,
 
 
     function setInvest(value) {
-        setinvestedValue(value.target.value);
+        if(value.target.validity.valid){
+            setinvestedValue(value.target.value);
+        }  
     }
 
     return (
@@ -85,8 +94,10 @@ const Coin = ({ icon, coinName, symbol, price, volume, priceChange24, marketcap,
 
                 </span>
                 <div className="coin">
-                    <img src={icon} alt="icon" />
-                    <h1>{coinName}</h1>
+                    <span className="coinName">
+                        <img src={icon} alt="icon" />
+                        <h1>{coinName}</h1>
+                    </span>
                     <p className="coin-symbol">{symbol.toLocaleString().toUpperCase()}</p>
                 </div>
                 <div className="coin-data">
@@ -105,12 +116,21 @@ const Coin = ({ icon, coinName, symbol, price, volume, priceChange24, marketcap,
                     </span>
                 </div>
 
-                <Popup open={closePopup} setOpen={setclosePopup} setInvest={setInvest} setCloseColor={seticonColor}>
-                    <span className="okbtn" onClick={() => {
-                        localStorage.setItem(id, `${investedValue}|${cur}`);
-                        seticonColor("green");
-                        setclosePopup(false)
-                    }}>OK</span>
+                <Popup open={closePopup} setOpen={setclosePopup} setInvest={setInvest} setCloseColor={seticonColor} title={coinName} color={setInputColor} style={inputColor}>
+                    <span className="button"  onClick={() => {
+                        if(investedValue){
+                            obj = { "id": id, "invested": investedValue, "cur": cur, "price": price }
+                            array.unshift(obj)
+                            localStorage.setItem("curCalc", JSON.stringify(array));
+                            seticonColor("green");
+                            setInputColor({borderColor: "white"})
+                            setclosePopup(false)
+                        }
+                        else{
+                            setInputColor({border: "3px solid red"})
+                        }
+
+                    }}><BsCheck size={25}/></span>
                 </Popup>
 
             </div>
