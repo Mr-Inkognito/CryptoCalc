@@ -1,4 +1,7 @@
 [
     {"id": "usd", "name": "$ "}, 
-    {"id": "czk", "name": "CZK "}
+    {"id": "czk", "name": "CZK "},
+    {"id": "eur", "name": "€ "},
+    {"id": "rub", "name": "RUB "},
+    {"id": "pln", "name": "PLN "}
 ]

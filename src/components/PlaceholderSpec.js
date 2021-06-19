@@ -18,7 +18,7 @@ const PlaceholderSpec = () => {
                         <p className="coin-price">Price</p>
                         <p className="amount">Amount</p>
                         <p className="coin-volume">Invested</p>
-                        <p>Profit in 24h</p>
+                        <p>Current value</p>
                         <p className="coin-marketcap">
                             Profit
                         </p>

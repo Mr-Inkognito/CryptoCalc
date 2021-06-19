@@ -14,7 +14,7 @@ const CoinSpec = ({ icon, coinName, symbol, price, cur, id, del }) => {
     }
 
     function getOBJ() {
-       let obj = JSON.parse(localStorage.getItem("curCalc"));
+        let obj = JSON.parse(localStorage.getItem("curCalc"));
         for (let i = 0; i < obj.length; i++) {
             if (obj[i].id === id) {
                 return obj[i];
@@ -24,7 +24,7 @@ const CoinSpec = ({ icon, coinName, symbol, price, cur, id, del }) => {
 
     coin = getOBJ();
 
-    
+
     const [invested, setinvested] = useState(coin.invested)
     const [oldValue, setoldValue] = useState(coin.price)
 
@@ -42,7 +42,7 @@ const CoinSpec = ({ icon, coinName, symbol, price, cur, id, del }) => {
                     <p className="coin-symbol">{symbol.toLocaleString().toUpperCase()}</p>
                 </div>
                 <div className="coin-data">
-                    <p className="coin-price">{currency}{price.toLocaleString()}</p>
+                    <p className="coin-price">{currency}{price}</p>
                     {(() => {
                         if (oldValue > 0 && invested > 0) {
                             console.log(oldValue);

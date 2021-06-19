@@ -8,7 +8,7 @@ const CoinListBook = ({ search, coins, cur }) => {
     const [filter, setfilter] = useState(coins)
 
     const del = (id) => {
-        setfilter(coins.filter((coin)=> coin.id !== id))
+        setfilter(coins.filter((coin) => coin.id !== id))
     }
 
     const coinFilter = filter.filter(coin =>
@@ -22,7 +22,7 @@ const CoinListBook = ({ search, coins, cur }) => {
             <Placeholder />
             {
                 coinFilter.map(coin => {
-                    return (localStorage.getItem("book")!==null && localStorage.getItem("book").includes(coin.id) ) ? (
+                    return (localStorage.getItem("book") !== null && localStorage.getItem("book").includes(coin.id)) ? (
                         <div>
                             <Coin
                                 key={coin.id}

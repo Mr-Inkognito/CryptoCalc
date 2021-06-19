@@ -7,7 +7,8 @@ import { BsCheck } from "react-icons/bs";
 import { IoMdHeart } from "react-icons/io";
 import Popup from './Popup';
 import '../styles/popup.css'
-import { isCompositeComponentWithType } from 'react-dom/test-utils';
+
+let parser;
 let currency;
 let str = "";
 let obj = {};
@@ -15,12 +16,8 @@ let array = [];
 
 const Coin = ({ icon, coinName, symbol, price, volume, priceChange24, marketcap, cur, id, del }) => {
 
-    for (let i = 0; i < curmap.length; i++) {
-        if (curmap[i].id === cur) {
-            currency = curmap[i].name.toLocaleString();
-        }
-    }
-
+    parser = JSON.parse(localStorage.getItem("cur"));
+    currency = parser.name;
 
     const [bookmark, setbookmark] = useState(() => {
         if (localStorage.getItem("book") !== null && localStorage.getItem("book").includes(id)) {
@@ -37,13 +34,13 @@ const Coin = ({ icon, coinName, symbol, price, volume, priceChange24, marketcap,
             return "green";
         }
         else {
-           return "white"; 
+            return "white";
         }
     })
     const [investedValue, setinvestedValue] = useState(null)
-    const [inputColor, setInputColor] = useState({borderColor: "white"})
-        
-    
+    const [inputColor, setInputColor] = useState({ borderColor: "white" })
+
+
 
 
     function addBookmark() {
@@ -71,9 +68,9 @@ const Coin = ({ icon, coinName, symbol, price, volume, priceChange24, marketcap,
 
 
     function setInvest(value) {
-        if(value.target.validity.valid){
+        if (value.target.validity.valid) {
             setinvestedValue(value.target.value);
-        }  
+        }
     }
 
     return (
@@ -117,20 +114,20 @@ const Coin = ({ icon, coinName, symbol, price, volume, priceChange24, marketcap,
                 </div>
 
                 <Popup open={closePopup} setOpen={setclosePopup} setInvest={setInvest} setCloseColor={seticonColor} title={coinName} color={setInputColor} style={inputColor}>
-                    <span className="button"  onClick={() => {
-                        if(investedValue){
+                    <span className="button" onClick={() => {
+                        if (investedValue) {
                             obj = { "id": id, "invested": investedValue, "cur": cur, "price": price }
                             array.unshift(obj)
                             localStorage.setItem("curCalc", JSON.stringify(array));
                             seticonColor("green");
-                            setInputColor({borderColor: "white"})
+                            setInputColor({ borderColor: "white" })
                             setclosePopup(false)
                         }
-                        else{
-                            setInputColor({border: "3px solid red"})
+                        else {
+                            setInputColor({ border: "3px solid red" })
                         }
 
-                    }}><BsCheck size={25}/></span>
+                    }}><BsCheck size={25} /></span>
                 </Popup>
 
             </div>

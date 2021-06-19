@@ -3,7 +3,7 @@
     width: 100%;
     background-color: #111111;
     height: 80px;
-    justify-content: flex-start;
+    justify-content: start;
     align-items: center;
 }
 
@@ -14,27 +14,38 @@
 
 .investMark {
     cursor: pointer;
-    margin-left: 20px;
-    margin-right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    height: 100%;
+    width: 30%;
 }
 
 .Bookmarks {
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    height: 100%;
+    width: 30%;
 }
 
 .search {
     display: flex;
-    width: 15%;
+    width: 50%;
     height: 100%;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     padding: 10px;
+    padding-right: 50px;
 }
 
 .search-input {
     display: flex;
     align-items: center;
-    width: 100%;
+    width: 30%;
     height: 80%;
     font-size: 1.5em;
     text-align: center;
@@ -47,6 +58,59 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 50px;
-    margin-left: 20px;
+    height: 100%;
+    width: 15%;
+    cursor: pointer;
+}
+
+.btn {
+    display: flex;
+    color: #fff;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    width: 30%;
+    border-radius: 10px;
+}
+
+.btn:hover {
+    background-color: rgb(50, 50, 53);
+    transition: 0.25s;
+}
+
+.currency {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 30%;
+}
+
+.clicked{
+    border-radius: 10px;
+    background-color: #1a1a1c;
+}
+
+.buttonArea{
+    display: flex;
+    width: 35%;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btnCur {
+    display: flex;
+    color: #fff;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.btnCur:hover {
+    background-color: rgb(50, 50, 53);
 }

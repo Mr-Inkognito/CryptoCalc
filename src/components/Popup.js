@@ -14,7 +14,7 @@ const Popup = (props) => {
                     <div className="buttons">
                         <span className="button" onClick={() => {
                             props.setOpen(false);
-                            props.color({borderColor: "white"});
+                            props.color({ borderColor: "white" });
                         }}>
                             <BsX size={25} />
                         </span>
