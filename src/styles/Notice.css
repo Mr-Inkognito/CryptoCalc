@@ -10,10 +10,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50%;
-    height: 100px;
+    width: 60%;
+    height: 20%;
     color: #fff;
     font-size: 3em;
     opacity: 50%;
-    border: 5px solid #111111
+    border: 5px solid #111111;
+}
+
+span{
+    padding: 10px;
 }

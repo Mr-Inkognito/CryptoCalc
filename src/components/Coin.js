@@ -16,8 +16,10 @@ let array = [];
 
 const Coin = ({ icon, coinName, symbol, price, volume, priceChange24, marketcap, cur, id, del }) => {
 
+
     parser = JSON.parse(localStorage.getItem("cur"));
     currency = parser.name;
+
 
     const [bookmark, setbookmark] = useState(() => {
         if (localStorage.getItem("book") !== null && localStorage.getItem("book").includes(id)) {

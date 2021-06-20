@@ -18,6 +18,7 @@ function App() {
       return curr.id;
     }
     else{
+      localStorage.setItem("cur", JSON.stringify({ "id": "usd", "name": "$ "}))
       return "usd";
     }
   })
