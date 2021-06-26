@@ -3,5 +3,6 @@
     {"id": "czk", "name": "CZK "},
     {"id": "eur", "name": "€ "},
     {"id": "rub", "name": "RUB "},
-    {"id": "pln", "name": "PLN "}
+    {"id": "pln", "name": "PLN "},
+    {"id": "btc", "name": "₿ "}   
 ]
